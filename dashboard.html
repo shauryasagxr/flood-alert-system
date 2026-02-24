@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flood Risk Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dashboard">
+
+    <h2 id="cityName"></h2>
+    <div class="icon" id="weatherIcon">☁️</div>
+    <h1 id="riskText"></h1>
+
+    <div class="progress">
+        <div class="bar" id="riskBar"></div>
+    </div>
+
+    <script>
+        const apiKey = "1c7de98d8db631d95b78569e8423330b";
+
+        let city = localStorage.getItem("city");
+        document.getElementById("cityName").innerText = "Flood Risk in " + city;
+
+        fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`)
+        .then(response => response.json())
+        .then(data => {
+
+            let weather = data.weather[0].main;
+            let rain = data.rain ? data.rain["1h"] : 0;
+
+            let risk = "Low";
+            let width = "30%";
+            let color = "green";
+            let icon = "☀️";
+
+            if(weather.includes("Rain")) icon = "🌧️";
+            if(weather.includes("Cloud")) icon = "☁️";
+
+            if (rain > 10) {
+                risk = "High";
+                width = "90%";
+                color = "red";
+            } else if (rain > 5) {
+                risk = "Medium";
+                width = "60%";
+                color = "orange";
+            }
+
+            document.getElementById("weatherIcon").innerText = icon;
+            document.getElementById("riskText").innerText = risk + " Risk ↑";
+            document.getElementById("riskText").className = risk.toLowerCase();
+
+            let bar = document.getElementById("riskBar");
+            bar.style.width = width;
+            bar.style.background = color;
+        });
+    </script>
+
+</body>
+</html>
