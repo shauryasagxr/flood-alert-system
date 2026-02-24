@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Search City</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="search">
+
+    <h2>Enter Your City</h2>
+    <input type="text" id="city" placeholder="Enter city name">
+    <button onclick="goToDashboard()">Check</button>
+
+    <script>
+        function goToDashboard() {
+            let city = document.getElementById("city").value;
+            localStorage.setItem("city", city);
+            window.location.href = "dashboard.html";
+        }
+    </script>
+
+</body>
+</html>
