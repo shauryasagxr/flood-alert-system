@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    text-align: center;
+}
+
+/* Landing Page */
+.landing {
+    height: 100vh;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+.glass {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 50px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+}
+
+.btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 25px;
+    background: #00c6ff;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #0072ff;
+}
+
+/* Search Page */
+.search {
+    height: 100vh;
+    background: #f0f8ff;
+    padding-top: 120px;
+}
+
+input {
+    padding: 10px;
+    width: 250px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+button {
+    padding: 10px 20px;
+    background: #0072ff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Dashboard */
+.dashboard {
+    padding-top: 100px;
+    background: #f4f9ff;
+    height: 100vh;
+}
+
+.progress {
+    width: 300px;
+    height: 20px;
+    background: #ddd;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.bar {
+    height: 100%;
+    border-radius: 10px;
+}
+
+.low { color: green; }
+.medium { color: orange; }
+.high { color: red; }
+
+.icon {
+    font-size: 60px;
+}
