@@ -1,17 +1,19 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Flood Risk Dashboard</title>
-    <link rel="stylesheet" href="style.css">
-</head>
 <body class="dashboard">
 
-    <h2 id="cityName"></h2>
-    <div class="icon" id="weatherIcon">☁️</div>
-    <h1 id="riskText"></h1>
+    <div class="card">
 
-    <div class="progress">
-        <div class="bar" id="riskBar"></div>
+        <h2 id="cityName"></h2>
+
+        <div class="icon" id="weatherIcon">☁️</div>
+
+        <h1 id="riskText"></h1>
+
+        <div class="progress">
+            <div class="bar" id="riskBar"></div>
+        </div>
+
+        <div class="details" id="details"></div>
+
     </div>
 
     <script>
@@ -25,11 +27,14 @@
         .then(data => {
 
             let weather = data.weather[0].main;
-            let rain = data.rain ? data.rain["1h"] : 0;
+            let rain = data.rain ? data.rain["1h"] || 0 : 0;
+            let humidity = data.main.humidity;
+            let temp = data.main.temp;
+            let wind = data.wind.speed;
 
             let risk = "Low";
             let width = "30%";
-            let color = "green";
+            let color = "#00ff88";
             let icon = "☀️";
 
             if(weather.includes("Rain")) icon = "🌧️";
@@ -38,11 +43,11 @@
             if (rain > 10) {
                 risk = "High";
                 width = "90%";
-                color = "red";
+                color = "#ff4d4d";
             } else if (rain > 5) {
                 risk = "Medium";
                 width = "60%";
-                color = "orange";
+                color = "#ffcc00";
             }
 
             document.getElementById("weatherIcon").innerText = icon;
@@ -52,8 +57,14 @@
             let bar = document.getElementById("riskBar");
             bar.style.width = width;
             bar.style.background = color;
+
+            document.getElementById("details").innerHTML = `
+                <div class="detail-box">🌡 Temp<br><b>${temp}°C</b></div>
+                <div class="detail-box">💧 Humidity<br><b>${humidity}%</b></div>
+                <div class="detail-box">🌧 Rain (1h)<br><b>${rain} mm</b></div>
+                <div class="detail-box">💨 Wind<br><b>${wind} m/s</b></div>
+            `;
         });
     </script>
 
 </body>
-</html>
